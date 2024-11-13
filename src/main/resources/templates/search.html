@@ -11,6 +11,7 @@
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
     <form th:action="@{/search/results}" method = "post">
+
         <h2>Search by:</h2>
 
         <p>
@@ -36,7 +37,7 @@
 
     <hr />
 
-    <!--    //fragment to display search results-->
+    <!--    //fragment to display search1 results-->
     <div th:replace="~{fragments :: search-results}"></div>
 
 
