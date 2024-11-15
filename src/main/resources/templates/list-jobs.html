@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="~{fragments :: head}">
-</head>
+<head th:replace="~{fragments :: head}"></head>
 <body>
 
 <div th:replace="~{fragments :: page-header}"></div>
@@ -10,12 +9,32 @@
 
   <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-  <!-- TODO #1 - Use a loop to display job results in a table. -->
+  <!-- Updated table structure to display all jobs in a single table -->
+  <table th:each="job : ${jobs}" class="job-listing" th:if="${jobs != null && !jobs.isEmpty()}">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Employer</th>
+      <th>Location</th>
+      <th>Position Type</th>
+      <th>Skill</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${job.getId()}">ID</td>
+      <td th:text="${job.getName()}">Name</td>
+      <td th:text="${job.getEmployer()}">Employer</td>
+      <td th:text="${job.getLocation()}">Location</td>
+      <td th:text="${job.getPositionType()}">Position Type</td>
+      <td th:text="${job.getCoreCompetency()}">Skill</td>
+    </tr>
+    </tbody>
+  </table>
 
-  <!--    //fragment to display search results-->
-  <div th:replace="~{fragments :: search-results}"></div>
-
-
+  <!-- Message if no jobs are found -->
+  <p th:if="${jobs == null || jobs.isEmpty()}">No jobs found for this category.</p>
 
 </div>
 

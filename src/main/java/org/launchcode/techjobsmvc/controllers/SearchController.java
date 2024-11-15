@@ -28,26 +28,19 @@ public class SearchController {
     }
 
     // TODO #3 - Create a handler to process a search request and render the updated search view.
-
-    //getting radio button name in request param parwanthesis gets the correct column name
-    @PostMapping(value="results")
-    public String displaySearchResults(Model model, @RequestParam("searchType") String column, @RequestParam(required = false) String searchTerm)
-    {
+    @PostMapping("results")
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         ArrayList<Job> jobs;
-        if (column.equals("all")){
+        if (searchTerm.isEmpty() || searchTerm.equalsIgnoreCase("all")) {
             jobs = JobData.findAll();
-            System.out.println("searching all" + jobs);
-
-
+            model.addAttribute("title", "All Jobs");
         } else {
-            jobs = JobData.findByColumnAndValue(column, searchTerm);
-
+            jobs = JobData.findByColumnAndValue(searchType,searchTerm);
         }
-        model.addAttribute("columns", columnChoices);
-        model.addAttribute("jobs", jobs);
-
+        model.addAttribute("jobs",jobs);
+        model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("searchType",searchType);
         return "search";
-
     }
 
 }

@@ -19,15 +19,19 @@
   </tr>
   <tr>
     <!-- TODO #2: Complete the View Jobs By Category Table. -->
-    <!--  Removing because added code in ListController-->
-    <!--    <td></td> &lt;!&ndash; Feel free to remove or modify this element if necessary. &ndash;&gt;-->
+
+    <td>
+      <li>
+        <a th:href="@{/list/jobs(column=all)}">View All</a>
+      </li>
+    </td> <!-- Feel free to remove or modify this element if necessary. -->
 
     <td th:each="category : ${tableChoices}">
-
-      <li th:each="item : ${category.value}">
-        <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
-      </li>
-
+      <ul>
+        <li th:each="item : ${category.value}">
+          <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
+        </li>
+      </ul>
     </td>
   </tr>
 </table>

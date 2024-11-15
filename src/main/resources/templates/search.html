@@ -11,7 +11,6 @@
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
     <form th:action="@{/search/results}" method = "post">
-
         <h2>Search by:</h2>
 
         <p>
@@ -21,7 +20,7 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == searchType}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -37,10 +36,35 @@
 
     <hr />
 
-    <!--     //fragment to display search1 results-->
-    <div th:replace="~{fragments :: search-results}"></div>
-
-
+    <!-- TODO #4 - Loop over the search results to display all job fields. -->
+    <th:block>
+        <table th:each="job : ${jobs}" class="job-listing">
+            <tr>
+                <td>ID</td>
+                <td th:text="${job.getId()}"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td th:text="${job.getName()}"></td>
+            </tr>
+            <tr>
+                <td>Employer</td>
+                <td th:text="${job.getEmployer()}"></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td th:text="${job.getLocation()}"></td>
+            </tr>
+            <tr>
+                <td>Position Type</td>
+                <td th:text="${job.getPositionType()}"></td>
+            </tr>
+            <tr>
+                <td>Skill</td>
+                <td th:text="${job.getCoreCompetency()}"></td>
+            </tr>
+        </table>
+    </th:block>
 </div>
 
 </body>
